@@ -1,4 +1,4 @@
-package com.example.quizappcrud.login.ui
+package com.example.quizappcrud.login.ui.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -16,7 +16,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.quizappcrud.R
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
@@ -65,7 +64,9 @@ fun Login(modifier: Modifier, viewModel: LoginViewModel) {
 @Composable
 fun LoginButton(loginEnable: Boolean, onLoginSelected: () -> Unit) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = {
+
+        },
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp),

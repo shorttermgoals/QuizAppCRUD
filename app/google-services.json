@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "817968137436",
+    "project_id": "quizappcrud",
+    "storage_bucket": "quizappcrud.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817968137436:android:8252204f59dc2aed072019",
+        "android_client_info": {
+          "package_name": "com.example.quizappcrud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817968137436-rcrm0q9749tcjqnta0a6n4hlf0qembp6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.quizappcrud",
+            "certificate_hash": "e2ccaa5aff4c82364091b0aebb5aaa4f716e4aca"
+          }
+        },
+        {
+          "client_id": "817968137436-kqafufpucjfhfgk8j6lsbtpdgut6fb7p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9A2PH53IJ9IfKvLLiHjm3t41-nB3eSM8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "817968137436-kqafufpucjfhfgk8j6lsbtpdgut6fb7p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

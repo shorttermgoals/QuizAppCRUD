@@ -1,4 +1,4 @@
-package com.example.quizappcrud.login.ui
+package com.example.quizappcrud.login.ui.login
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
@@ -35,5 +35,16 @@ class LoginViewModel : ViewModel(){
     private fun isValidPassword(password: String): Boolean = password.length > 6
 
     private fun isValidEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+
+    fun loginButton(){
+
+    }
+
+    fun buttonSuccess(){
+
+    }
+    fun buttonFail(){
+
+    }
 
 }
