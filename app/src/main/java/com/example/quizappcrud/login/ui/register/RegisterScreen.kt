@@ -73,7 +73,7 @@ fun Register(modifier: Modifier, viewModel: RegisterViewModel) {
 fun RegisterButton(registerEnable: Boolean, onRegisterSelected: () -> Unit) {
     Button(
         onClick = {
-            
+
         },
         modifier = Modifier
             .fillMaxWidth()
