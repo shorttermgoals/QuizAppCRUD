@@ -1,19 +1,22 @@
 package com.example.quizappcrud.crud.guardar
 
-import android.graphics.Color
+import android.graphics.Color.*
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.quizappcrud.crud.db
 import com.example.quizappcrud.crud.nombre_coleccion
-import java.lang.reflect.Modifier
+
 
 @Composable
 fun GuardarDatos(ViewModelGuardar: ViewModelGuardar){
@@ -48,7 +51,7 @@ fun GuardarDatos(ViewModelGuardar: ViewModelGuardar){
                 .padding(15.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center) {
-                Text(   text = "Guardar coche",
+                Text(   text = "Guardar datos",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     modifier = Modifier.padding(bottom = 15.dp))
