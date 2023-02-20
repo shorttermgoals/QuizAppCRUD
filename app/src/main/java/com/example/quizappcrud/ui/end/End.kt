@@ -1,5 +1,6 @@
-package com.example.quizappcrud.ui.inicio
+package com.example.quizappcrud.ui.end
 
+import android.view.View
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,17 +21,17 @@ import androidx.navigation.NavHostController
 import com.example.quizappcrud.R
 
 @Composable
-fun Inicio(ViewModelInicio: ViewModelInicio, navController: NavHostController) {
+fun End(ViewModelEnd:ViewModelEnd, navController: NavHostController) {
 
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        elevation = 12.dp,
-        shape = MaterialTheme.shapes.small,
-        backgroundColor = Color.White,
-        contentColor = Color.DarkGray,
-        border = BorderStroke(1.dp, Color.DarkGray)
+    modifier = Modifier
+    .fillMaxWidth()
+    .padding(16.dp),
+    elevation = 12.dp,
+    shape = MaterialTheme.shapes.small,
+    backgroundColor = Color.White,
+    contentColor = Color.DarkGray,
+    border = BorderStroke(1.dp, Color.DarkGray)
     ) {
         Box(modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
@@ -45,7 +46,12 @@ fun Inicio(ViewModelInicio: ViewModelInicio, navController: NavHostController) {
                     painter = painterResource(id = R.drawable.logo_app___copia),
                     contentDescription = "Header"
                 )
-                Text(   text = "Hola *nombre de usuario",
+                Text(   text = "Resultado: ",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(bottom = 6.dp))
+
+                Text(   text = "*contadorRespuestasCorrectas*/*count(preguntas)*",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     modifier = Modifier.padding(bottom = 15.dp))
@@ -58,7 +64,7 @@ fun Inicio(ViewModelInicio: ViewModelInicio, navController: NavHostController) {
                     .fillMaxWidth()
                     .padding(top = 10.dp),
                     onClick = {
-                        ViewModelInicio.rutaButton(navController,"Test")
+                        ViewModelEnd.rutaButton(navController, "test")
                     }) {
                     Text(text = "Comenzar")
                 }

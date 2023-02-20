@@ -1,4 +1,6 @@
 package com.example.quizappcrud.ui.test
 
-class ViewModelTest {
+import androidx.lifecycle.ViewModel
+
+class ViewModelTest:ViewModel() {
 }
