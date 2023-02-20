@@ -11,7 +11,7 @@ import com.example.quizappcrud.login.ui.login.LoginScreen
 import com.example.quizappcrud.login.ui.login.LoginViewModel
 import com.example.quizappcrud.ui.theme.QuizAppCRUDTheme
 
-class MainActivity : ComponentActivity() {
+class AuthActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

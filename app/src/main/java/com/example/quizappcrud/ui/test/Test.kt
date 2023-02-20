@@ -12,6 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.quizappcrud.crud.ViewModelConsultar
+import com.example.quizappcrud.crud.db
+import com.example.quizappcrud.crud.nombre_coleccion
 
 // *TEMPORAL* Antigua extracción de datos desde arrays
 // val pr = PreguntaRespuesta.pregunta;
@@ -33,14 +36,14 @@ fun Test(ViewModelTest:ViewModelTest) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center) {
 
-            Botones()
+            Botones(ViewModelConsultar())
 
         }
     }
 }
 
 @Composable
-fun Botones(){
+fun Botones(ViewModelConsultar:ViewModelConsultar){
     var contador  by remember { mutableStateOf(0) }
     var puntuacion by remember { mutableStateOf(0) };
     var enabled by remember{ mutableStateOf(true) };
@@ -61,7 +64,7 @@ fun Botones(){
         modifier = Modifier.padding(bottom = 10.dp)
             .fillMaxWidth()
     )
-    Text(   text = pr[contador],
+    Text(   text = ViewModelConsultar.consultarButton(db, nombre_coleccion,contador.toString()),
         modifier = Modifier.padding(bottom = 10.dp)
             .fillMaxWidth())
 
