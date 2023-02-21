@@ -70,10 +70,10 @@ fun Register(modifier: Modifier, viewModel: RegisterViewModel) {
 }
 
 @Composable
-fun RegisterButton(registerEnable: Boolean, onRegisterSelected: () -> Unit) {
+fun RegisterButton(registerViewModel: RegisterViewModel, registerEnable: Boolean, onRegisterSelected: () -> Unit) {
     Button(
         onClick = {
-
+            registerViewModel.registerButton()
         },
         modifier = Modifier
             .fillMaxWidth()

@@ -12,14 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.quizappcrud.crud.ViewModelConsultar
+import com.example.quizappcrud.crud.consultar.ViewModelConsultar
 import com.example.quizappcrud.crud.db
+import com.example.quizappcrud.crud.informe.ViewModelInforme
 import com.example.quizappcrud.crud.nombre_coleccion
-
-// *TEMPORAL* Antigua extracción de datos desde arrays
-// val pr = PreguntaRespuesta.pregunta;
-// val re = PreguntaRespuesta.respuestas;
-// val rc = PreguntaRespuesta.respuestaCorrecta;
+import java.util.regex.Pattern
+import kotlin.streams.toList
 
 @Composable
 fun Test(ViewModelTest:ViewModelTest) {
@@ -36,14 +34,26 @@ fun Test(ViewModelTest:ViewModelTest) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center) {
 
-            Botones(ViewModelConsultar())
+            Botones(ViewModelConsultar(),ViewModelInforme())
 
         }
     }
 }
 
 @Composable
-fun Botones(ViewModelConsultar:ViewModelConsultar){
+fun Botones(ViewModelConsultar: ViewModelConsultar, ViewModelInforme: ViewModelInforme){
+
+    var preguntas = ViewModelInforme.informePreguntas(db, nombre_coleccion)
+    val listaPreguntas = preguntas.toString().split(",").toList()
+    var respuestas1 = ViewModelInforme.informeRespuesta1(db, nombre_coleccion)
+    val listaRespuestas1 = respuestas1.toString().split(",").toList()
+    var respuestas2 = ViewModelInforme.informeRespuesta2(db, nombre_coleccion)
+    val listaRespuestas2 = respuestas2.toString().split(",").toList()
+    var respuestas3 = ViewModelInforme.informeRespuesta3(db, nombre_coleccion)
+    val listaRespuestas3 = respuestas3.toString().split(",").toList()
+    var respuestasCorrectas = ViewModelInforme.informeRespuestaCorrecta(db, nombre_coleccion)
+    val listaRespuestasCorrectas = respuestasCorrectas.toString().split(",").toList()
+
     var contador  by remember { mutableStateOf(0) }
     var puntuacion by remember { mutableStateOf(0) };
     var enabled by remember{ mutableStateOf(true) };
@@ -64,7 +74,7 @@ fun Botones(ViewModelConsultar:ViewModelConsultar){
         modifier = Modifier.padding(bottom = 10.dp)
             .fillMaxWidth()
     )
-    Text(   text = ViewModelConsultar.consultarButton(db, nombre_coleccion,contador.toString()),
+    Text(   text = listaPreguntas[contador],
         modifier = Modifier.padding(bottom = 10.dp)
             .fillMaxWidth())
 
@@ -75,7 +85,7 @@ fun Botones(ViewModelConsultar:ViewModelConsultar){
         enabled = enabled,
         onClick = {
             enabled = !enabled
-            if(re[contador][0] == rc[contador]) {
+            if(listaRespuestas1[contador] == listaRespuestasCorrectas[contador] || listaRespuestas2[contador] == listaRespuestasCorrectas[contador] || listaRespuestas3[contador] == listaRespuestasCorrectas[contador]) {
                 puntuacion += 1
 
                 color = when (color) {
@@ -89,7 +99,7 @@ fun Botones(ViewModelConsultar:ViewModelConsultar){
                 }
             }
         }) {
-        Text(text = re[contador][0])
+        Text(text = listaRespuestas1[contador])
     }
 
     Button(modifier = Modifier
@@ -99,7 +109,7 @@ fun Botones(ViewModelConsultar:ViewModelConsultar){
         enabled = enabled,
         onClick = {
             enabled = !enabled
-            if(re[contador][1] == rc[contador]) {
+            if(listaRespuestas1[contador] == listaRespuestasCorrectas[contador] || listaRespuestas2[contador] == listaRespuestasCorrectas[contador] || listaRespuestas3[contador] == listaRespuestasCorrectas[contador]) {
                 puntuacion += 1
 
                 color1 = when (color1) {
@@ -113,7 +123,7 @@ fun Botones(ViewModelConsultar:ViewModelConsultar){
                 }
             }
         }) {
-        Text(text = re[contador][1])
+        Text(text = listaRespuestas2[contador])
     }
 
     Button(modifier = Modifier
@@ -123,7 +133,7 @@ fun Botones(ViewModelConsultar:ViewModelConsultar){
         enabled = enabled,
         onClick = {
             enabled = !enabled
-            if(re[contador][2] == rc[contador]) {
+            if(listaRespuestas1[contador] == listaRespuestasCorrectas[contador] || listaRespuestas2[contador] == listaRespuestasCorrectas[contador] || listaRespuestas3[contador] == listaRespuestasCorrectas[contador]) {
                 puntuacion += 1
 
                 color2 = when (color2) {
@@ -138,13 +148,13 @@ fun Botones(ViewModelConsultar:ViewModelConsultar){
                 }
             }
         }) {
-        Text(text = re[contador][2])
+        Text(text = listaRespuestas3[contador])
     }
 
     Button( modifier = Modifier.padding(top = 20.dp) ,
         enabled = !enabled,
         onClick = {
-            if(cont<pr.size) {
+            if(cont<listaPreguntas.size) {
                 enabled = !enabled
                 contador += 1
 
