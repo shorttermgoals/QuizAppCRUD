@@ -7,6 +7,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,14 +35,14 @@ fun Test(ViewModelTest:ViewModelTest) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center) {
 
-            Botones(ViewModelConsultar(),ViewModelInforme())
+            Botones(ViewModelTest(),ViewModelInforme())
 
         }
     }
 }
 
 @Composable
-fun Botones(ViewModelConsultar: ViewModelConsultar, ViewModelInforme: ViewModelInforme){
+fun Botones(ViewModelTest: ViewModelTest, ViewModelInforme: ViewModelInforme){
 
     var preguntas = ViewModelInforme.informePreguntas(db, nombre_coleccion)
     val listaPreguntas = preguntas.toString().split(",").toList()
@@ -54,9 +55,9 @@ fun Botones(ViewModelConsultar: ViewModelConsultar, ViewModelInforme: ViewModelI
     var respuestasCorrectas = ViewModelInforme.informeRespuestaCorrecta(db, nombre_coleccion)
     val listaRespuestasCorrectas = respuestasCorrectas.toString().split(",").toList()
 
-    var contador  by remember { mutableStateOf(0) }
-    var puntuacion by remember { mutableStateOf(0) };
-    var enabled by remember{ mutableStateOf(true) };
+    val contador:Int by ViewModelTest.contador.observeAsState(initial = 0)
+    val puntuacion:Int by ViewModelTest.puntuacion.observeAsState (initial = 0)
+    val enabled:Boolean by ViewModelTest.enabled.observeAsState(initial = true)
 
     val colour = Color.Transparent
     val verde = Color.Green
@@ -71,11 +72,13 @@ fun Botones(ViewModelConsultar: ViewModelConsultar, ViewModelInforme: ViewModelI
     Text(
         text = "Pregunta $cont",
         fontWeight = FontWeight.Bold,
-        modifier = Modifier.padding(bottom = 10.dp)
+        modifier = Modifier
+            .padding(bottom = 10.dp)
             .fillMaxWidth()
     )
     Text(   text = listaPreguntas[contador],
-        modifier = Modifier.padding(bottom = 10.dp)
+        modifier = Modifier
+            .padding(bottom = 10.dp)
             .fillMaxWidth())
 
     Button(modifier = Modifier
@@ -200,5 +203,4 @@ fun Botones(ViewModelConsultar: ViewModelConsultar, ViewModelInforme: ViewModelI
         colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray)) {
         Text(text = "Siguiente")
     }
-    Text(text = "Tu puntuación es de " + puntuacion)
 }

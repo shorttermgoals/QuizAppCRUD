@@ -15,29 +15,31 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.quizappcrud.R
+import com.example.quizappcrud.login.data.db
+import com.example.quizappcrud.login.data.nombre_coleccion
 import com.example.quizappcrud.login.ui.login.*
 import kotlinx.coroutines.launch
 
 @Composable
-fun RegisterScreen(viewModel: RegisterViewModel) {
+fun RegisterScreen(RegisterViewModel: RegisterViewModel) {
     Box(
         Modifier
             .fillMaxSize()
             .padding(16.dp)){
-        Register(Modifier.align(Alignment.Center), viewModel)
+        Register(Modifier.align(Alignment.Center), RegisterViewModel)
     }
 }
 
 @Composable
-fun Register(modifier: Modifier, viewModel: RegisterViewModel) {
-    val nombre:String by viewModel.nombre.observeAsState(initial = "")
-    val apellidos:String by viewModel.apellidos.observeAsState(initial = "")
-    val edad:String by viewModel.edad.observeAsState(initial = "")
-    val nacionalidad:String by viewModel.nacionalidad.observeAsState(initial = "")
-    val email:String by viewModel.email.observeAsState(initial = "")
-    val password:String by viewModel.password.observeAsState(initial = "")
-    val registerEnable:Boolean by viewModel.registerEnable.observeAsState(initial = false)
-    val isLoading:Boolean by viewModel.isLoading.observeAsState(initial = false)
+fun Register(modifier: Modifier, RegisterViewModel: RegisterViewModel) {
+    val nombre:String by RegisterViewModel.nombre.observeAsState(initial = "")
+    val apellidos:String by RegisterViewModel.apellidos.observeAsState(initial = "")
+    val edad:String by RegisterViewModel.edad.observeAsState(initial = "")
+    val nacionalidad:String by RegisterViewModel.nacionalidad.observeAsState(initial = "")
+    val email:String by RegisterViewModel.email.observeAsState(initial = "")
+    val password:String by RegisterViewModel.password.observeAsState(initial = "")
+    val registerEnable:Boolean by RegisterViewModel.registerEnable.observeAsState(initial = false)
+    val isLoading:Boolean by RegisterViewModel.isLoading.observeAsState(initial = false)
     val coroutineScope = rememberCoroutineScope()
 
     if(isLoading){
@@ -48,20 +50,20 @@ fun Register(modifier: Modifier, viewModel: RegisterViewModel) {
         Column(modifier = Modifier) {
             HeaderImage(modifier = Modifier.align(Alignment.CenterHorizontally))
             Spacer(modifier = Modifier.padding(16.dp))
-            NameField(nombre){ viewModel.onRegisterChanged(it, apellidos, edad, nacionalidad, email, password) }
+            NameField(nombre){ RegisterViewModel.onRegisterChanged(it, apellidos, edad, nacionalidad, email, password) }
             Spacer(modifier = Modifier.padding(4.dp))
-            SurnameField(apellidos){ viewModel.onRegisterChanged(nombre,it, edad, nacionalidad, email, password) }
+            SurnameField(apellidos){ RegisterViewModel.onRegisterChanged(nombre,it, edad, nacionalidad, email, password) }
             Spacer(modifier = Modifier.padding(8.dp))
-            AgeField(edad){ viewModel.onRegisterChanged(nombre, apellidos, it, nacionalidad, email, password) }
+            AgeField(edad){ RegisterViewModel.onRegisterChanged(nombre, apellidos, it, nacionalidad, email, password) }
             Spacer(modifier = Modifier.padding(8.dp))
-            NationalityField(nacionalidad){ viewModel.onRegisterChanged(nombre,apellidos, edad, it, email, password) }
+            NationalityField(nacionalidad){ RegisterViewModel.onRegisterChanged(nombre,apellidos, edad, it, email, password) }
             Spacer(modifier = Modifier.padding(8.dp))
-            EmailField(email){ viewModel.onRegisterChanged(nombre,it, edad, nacionalidad, it, password) }
+            EmailField(email){ RegisterViewModel.onRegisterChanged(nombre,it, edad, nacionalidad, it, password) }
             Spacer(modifier = Modifier.padding(8.dp))
-            PasswordField(password){ viewModel.onRegisterChanged(nombre,it, edad, nacionalidad, email, it) }
+            PasswordField(password){ RegisterViewModel.onRegisterChanged(nombre,it, edad, nacionalidad, email, it) }
             Spacer(modifier = Modifier.padding(16.dp))
-            RegisterButton(registerEnable){ coroutineScope.launch{
-                viewModel.onRegisterSelected()
+            RegisterButton(RegisterViewModel(),registerEnable){ coroutineScope.launch{
+                RegisterViewModel.onRegisterSelected()
             } }
         }
 
@@ -70,10 +72,10 @@ fun Register(modifier: Modifier, viewModel: RegisterViewModel) {
 }
 
 @Composable
-fun RegisterButton(registerViewModel: RegisterViewModel, registerEnable: Boolean, onRegisterSelected: () -> Unit) {
+fun RegisterButton(RegisterViewModel: RegisterViewModel, registerEnable: Boolean, onRegisterSelected: () -> Unit) {
     Button(
         onClick = {
-            registerViewModel.registerButton()
+
         },
         modifier = Modifier
             .fillMaxWidth()

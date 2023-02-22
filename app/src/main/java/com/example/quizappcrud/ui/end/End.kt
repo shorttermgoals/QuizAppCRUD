@@ -10,6 +10,8 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,9 +21,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.quizappcrud.R
+import com.example.quizappcrud.ui.test.ViewModelTest
 
 @Composable
-fun End(ViewModelEnd:ViewModelEnd, navController: NavHostController) {
+fun End(ViewModelEnd:ViewModelEnd,ViewModelTest: ViewModelTest, navController: NavHostController) {
+
+    val puntuacion:Int by ViewModelTest.puntuacion.observeAsState (initial = 0)
 
     Card(
     modifier = Modifier
@@ -42,31 +47,22 @@ fun End(ViewModelEnd:ViewModelEnd, navController: NavHostController) {
                 .padding(15.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center) {
-                Image(
-                    painter = painterResource(id = R.drawable.logo_app___copia),
-                    contentDescription = "Header"
-                )
                 Text(   text = "Resultado: ",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     modifier = Modifier.padding(bottom = 6.dp))
 
-                Text(   text = "*contadorRespuestasCorrectas*/*count(preguntas)*",
+                Text(   text = "Tu puntuación ha sido " + puntuacion,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     modifier = Modifier.padding(bottom = 15.dp))
-
-                Text(   text = "Pulsa el botón para comenzar el test de ciudadanía",
-                    fontSize = 15.sp,
-                    modifier = Modifier.padding(bottom = 15.dp))
-
                 Button(modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 10.dp),
                     onClick = {
-                        ViewModelEnd.rutaButton(navController, "test")
+                        ViewModelEnd.rutaButton(navController, "Inicio")
                     }) {
-                    Text(text = "Comenzar")
+                    Text(text = "Inicio")
                 }
 
             }
