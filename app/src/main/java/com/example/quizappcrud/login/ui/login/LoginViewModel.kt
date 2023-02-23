@@ -4,6 +4,7 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavHostController
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.delay
 
@@ -76,8 +77,6 @@ class LoginViewModel : ViewModel(){
                     _pw2.value = "${documentSnapshot.getString("password")}"
                     if(_email2.value == _email.value && _pw2.value == _password.value){
                         _detectorConsultaDatos.value = true
-                    }else{
-                        _detectorConsultaDatos.value = false
                     }
                 } else {
                     _confirmation_message.value = "ERROR: El dato buscado no existe en la base de datos."
@@ -86,6 +85,10 @@ class LoginViewModel : ViewModel(){
             .addOnFailureListener {
                 _confirmation_message.value = "ERROR: Ha habido un error. Por favor inténtelo de nuevo o más tarde."
             }
+    }
+
+    fun rutaButton(navController: NavHostController, ruta:String){
+        navController.navigate(ruta)
     }
 
 }

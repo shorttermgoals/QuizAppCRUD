@@ -30,7 +30,7 @@ import com.example.quizappcrud.ui.test.ViewModelTest
 @Composable
 fun AppNavigation() {
     val navigationController = rememberNavController()
-    NavHost(navController = navigationController, startDestination = AppScreens.Menu.ruta)
+    NavHost(navController = navigationController, startDestination = AppScreens.RegisterScreen.ruta)
 
     {
 

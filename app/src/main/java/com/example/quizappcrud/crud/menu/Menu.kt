@@ -79,6 +79,15 @@ fun Menu(ViewModelMenu: ViewModelMenu, navController: NavHostController) {
                     Text(text = "Informe datos")
                 }
 
+                Button(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp),
+                    onClick = {
+                        ViewModelMenu.rutaButton(navController,"MenuUser")
+                    }) {
+                    Text(text = "Menu usuario")
+                }
+
             }
         }
     }

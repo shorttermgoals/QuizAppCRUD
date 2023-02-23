@@ -16,11 +16,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.quizappcrud.crud.db
 import com.example.quizappcrud.crud.nombre_coleccion
 
 @Composable
-fun InformeDatos(ViewModelInforme: ViewModelInforme) {
+fun InformeDatos(ViewModelInforme: ViewModelInforme, navController: NavHostController) {
 
     val db = db
     var nombre_coleccion = nombre_coleccion
@@ -50,6 +51,15 @@ fun InformeDatos(ViewModelInforme: ViewModelInforme) {
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     modifier = Modifier.padding(bottom = 15.dp))
+
+                Button(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp),
+                    onClick = {
+                        ViewModelInforme.rutaButton(navController,"Menu" )
+                    }) {
+                    Text(text = "Ir a menú")
+                }
 
                 Button(modifier = Modifier
                     .fillMaxWidth()

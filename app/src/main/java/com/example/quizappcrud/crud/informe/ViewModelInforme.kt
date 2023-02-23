@@ -3,6 +3,7 @@ package com.example.quizappcrud.crud.informe
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavHostController
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ViewModelInforme:ViewModel() {
@@ -138,6 +139,10 @@ class ViewModelInforme:ViewModel() {
             .addOnFailureListener { resultado ->
                 _datos.value = "ERROR: Ha habido un error. Por favor inténtelo de nuevo o más tarde."
             }
+    }
+
+    fun rutaButton(navController: NavHostController, ruta:String){
+        navController.navigate(ruta)
     }
 
 

@@ -3,6 +3,7 @@ package com.example.quizappcrud.crud.guardar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavHostController
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ViewModelGuardar: ViewModel() {
@@ -82,5 +83,9 @@ class ViewModelGuardar: ViewModel() {
             return true
         }
         return false
+    }
+
+    fun rutaButton(navController: NavHostController, ruta:String){
+        navController.navigate(ruta)
     }
 }

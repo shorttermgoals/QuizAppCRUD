@@ -4,6 +4,7 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavHostController
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.delay
 
@@ -111,5 +112,9 @@ class RegisterViewModel : ViewModel(){
                 _detectorConsulta.value = false
             }
 
+    }
+
+    fun rutaButton(navController: NavHostController, ruta:String){
+        navController.navigate(ruta)
     }
 }

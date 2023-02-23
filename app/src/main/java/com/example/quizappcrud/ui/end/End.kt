@@ -60,9 +60,9 @@ fun End(ViewModelEnd:ViewModelEnd,ViewModelTest: ViewModelTest, navController: N
                     .fillMaxWidth()
                     .padding(top = 10.dp),
                     onClick = {
-                        ViewModelEnd.rutaButton(navController, "Inicio")
+                        ViewModelEnd.rutaButton(navController, "MenuUser")
                     }) {
-                    Text(text = "Inicio")
+                    Text(text = "Volver al menú")
                 }
 
             }

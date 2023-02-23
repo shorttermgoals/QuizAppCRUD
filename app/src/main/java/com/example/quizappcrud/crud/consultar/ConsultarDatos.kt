@@ -13,11 +13,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.quizappcrud.crud.db
 import com.example.quizappcrud.crud.nombre_coleccion
 
 @Composable
-fun ConsultarDatos(ViewModelConsultar: ViewModelConsultar) {
+fun ConsultarDatos(ViewModelConsultar: ViewModelConsultar, navController: NavHostController) {
 
     val db = db
     var nombre_coleccion = nombre_coleccion
@@ -60,6 +61,14 @@ fun ConsultarDatos(ViewModelConsultar: ViewModelConsultar) {
                     singleLine = true,
                 )
 
+                Button(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp),
+                    onClick = {
+                        ViewModelConsultar.rutaButton(navController,"Menu" )
+                    }) {
+                    Text(text = "Ir a menú")
+                }
 
                 Button(modifier = Modifier
                     .fillMaxWidth()

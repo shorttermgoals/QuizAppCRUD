@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.quizappcrud.R
 import com.example.quizappcrud.login.data.db
 import com.example.quizappcrud.login.data.nombre_coleccion
@@ -25,7 +26,7 @@ import com.example.quizappcrud.login.ui.login.*
 import kotlinx.coroutines.launch
 
 @Composable
-fun RegisterScreen(RegisterViewModel: RegisterViewModel) {
+fun RegisterScreen(RegisterViewModel: RegisterViewModel, navController: NavHostController) {
 
     val db = db
     val nombre_collecion = nombre_coleccion
@@ -129,6 +130,15 @@ fun RegisterScreen(RegisterViewModel: RegisterViewModel) {
                     "email" to email.toString(),
                     "password" to password.toString()
                 )
+
+                Button(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp),
+                    onClick = {
+                        RegisterViewModel.rutaButton(navController,"LoginScreen")
+                    }) {
+                    Text(text = "Ir al inicio de sesión")
+                }
 
 
                 Button(modifier = Modifier

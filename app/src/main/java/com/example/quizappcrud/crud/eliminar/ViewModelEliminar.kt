@@ -3,6 +3,7 @@ package com.example.quizappcrud.crud.eliminar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavHostController
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -47,5 +48,9 @@ class ViewModelEliminar: ViewModel() {
             .addOnFailureListener {
                 _confirmation_message.value = "ERROR: Ha habido un error. Por favor inténtelo de nuevo o más tarde."
             }
+    }
+
+    fun rutaButton(navController: NavHostController, ruta:String){
+        navController.navigate(ruta)
     }
 }
