@@ -27,30 +27,24 @@ class RegisterViewModel : ViewModel(){
     private val _password = MutableLiveData<String>()
     val password : LiveData<String> = _password
 
-    private val _registerEnable = MutableLiveData<Boolean>()
-    val registerEnable : LiveData<Boolean> = _registerEnable
-
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading : LiveData<Boolean> = _isLoading
+    private val _isButtonEnable = MutableLiveData<Boolean>()
+    val isButtonEnable: LiveData<Boolean> = _isButtonEnable
 
     private val _confirmation_message = MutableLiveData<String>()
     val confirmation_message: LiveData<String> = _confirmation_message
 
+    private val _detectorConsulta = MutableLiveData<Boolean>()
+    var detectorConsulta: LiveData<Boolean> = _detectorConsulta
 
-    fun onRegisterChanged(nombre:String, apellidos:String, edad:String, nacionalidad : String, email: String, password: String){
+
+    fun onCompletedFields(nombre:String, apellidos:String, edad:String, nacionalidad : String, email: String, password: String){
         _nombre.value = nombre
         _apellidos.value = apellidos
         _edad.value = edad
         _nacionalidad.value = nacionalidad
         _email.value = email
         _password.value = password
-        _registerEnable.value = isValidNombre(nombre) && isValidApellidos(apellidos) && isValidEdad(edad) && isValidNacionalidad(nacionalidad) && isValidEmail(email) && isValidPassword(password)
-    }
-
-    suspend fun onRegisterSelected(){
-        _isLoading.value = true
-        delay(4000)
-        _isLoading.value = false
+        _isButtonEnable.value = isValidNombre(nombre) && isValidApellidos(apellidos) && isValidEdad(edad) && isValidNacionalidad(nacionalidad) && isValidEmail(email) && isValidPassword(password)
     }
 
     private fun isValidPassword(password: String): Boolean = password.length > 6
@@ -66,9 +60,56 @@ class RegisterViewModel : ViewModel(){
     private fun isValidNombre(nombre: String): Boolean = nombre.length > 0
 
     fun registerButton(db: FirebaseFirestore, nombre_coleccion: String, email: String, dato: HashMap<String, String>){
+
+        consultarEmail(db,nombre_coleccion, email)
+
+        if(_detectorConsulta.value == true){
+            db.collection(nombre_coleccion)
+                .document(email)
+                .set(dato)
+                .addOnSuccessListener {
+                    buttonSuccess()
+                }
+                .addOnFailureListener {
+                    buttonFail()
+                }
+        }else if(_detectorConsulta.value == false){
+            buttonFail()
+        }
+
+
+
+    }
+
+    private fun buttonFail() {
+        _confirmation_message.value = "ERROR: Ha habido un error. Por favor inténtelo de nuevo o más tarde."
+    }
+
+    private fun buttonSuccess() {
+        _confirmation_message.value = "ÉXITO: Datos guardados en la base de datos."
+        _nombre.value = ""
+        _apellidos.value = ""
+        _edad.value = ""
+        _nacionalidad.value = ""
+        _email.value = ""
+        _password.value = ""
+    }
+
+    fun consultarEmail(db: FirebaseFirestore, nombre_coleccion:String, email: String){
+
         db.collection(nombre_coleccion)
             .document(email)
-            .set(dato)
+            .get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    _detectorConsulta.value = false
+                } else {
+                    _detectorConsulta.value = true
+                }
+            }
+            .addOnFailureListener {
+                _detectorConsulta.value = false
+            }
 
     }
 }

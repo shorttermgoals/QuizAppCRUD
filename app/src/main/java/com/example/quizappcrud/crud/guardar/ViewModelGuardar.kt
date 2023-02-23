@@ -47,16 +47,20 @@ class ViewModelGuardar: ViewModel() {
         ,respuesta2,respuesta3,respuestaCorrecta)
 
 
-    fun guardarButton(db: FirebaseFirestore, nombre_coleccion:String, id: String, dato: HashMap<String, String>) {
-        db.collection(nombre_coleccion)
-            .document(id)
-            .set(dato)
-            .addOnSuccessListener {
-                buttonSuccess()
-            }
-            .addOnFailureListener {
-                buttonFail()
-            }
+    fun guardarButton(db: FirebaseFirestore, nombre_coleccion:String, id: String, dato: HashMap<String, String>, respuesta1: String, respuesta2: String, respuesta3: String, respuestaCorrecta: String) {
+        if (isValidRespuestas(respuesta1, respuesta2, respuesta3, respuestaCorrecta) == true) {
+            db.collection(nombre_coleccion)
+                .document(id)
+                .set(dato)
+                .addOnSuccessListener {
+                    buttonSuccess()
+                }
+                .addOnFailureListener {
+                    buttonFail()
+                }
+        }else{
+            _confirmation_message.value = "Ninguna de las respuestas coinciden con la correcta"
+        }
     }
     fun buttonSuccess(){
         _confirmation_message.value = "ÉXITO: Datos guardados en la base de datos."

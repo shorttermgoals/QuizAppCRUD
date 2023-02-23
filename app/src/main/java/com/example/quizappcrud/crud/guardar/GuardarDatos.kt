@@ -129,7 +129,7 @@ fun GuardarDatos(ViewModelGuardar: ViewModelGuardar){
                     .fillMaxWidth()
                     .padding(top = 10.dp),
                     onClick = {
-                        ViewModelGuardar.guardarButton(db, nombre_coleccion, id, dato)
+                        ViewModelGuardar.guardarButton(db, nombre_coleccion, id, dato, respuesta1, respuesta2, respuesta3, respuestaCorrecta)
                     }) {
                     Text(text = "Guardar")
                 }

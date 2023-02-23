@@ -1,9 +1,11 @@
-package com.example.quizappcrud.crud.navigation
+package com.example.quizappcrud.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.quizappcrud.crud.consultar.ConsultarDatos
+import com.example.quizappcrud.crud.consultar.ViewModelConsultar
 import com.example.quizappcrud.crud.eliminar.EliminarDatos
 import com.example.quizappcrud.crud.eliminar.ViewModelEliminar
 import com.example.quizappcrud.crud.guardar.GuardarDatos
@@ -14,6 +16,16 @@ import com.example.quizappcrud.crud.menu.Menu
 import com.example.quizappcrud.crud.menu.ViewModelMenu
 import com.example.quizappcrud.crud.modificar.ModificarDatos
 import com.example.quizappcrud.crud.modificar.ViewModelModificar
+import com.example.quizappcrud.login.ui.login.LoginScreen
+import com.example.quizappcrud.login.ui.login.LoginViewModel
+import com.example.quizappcrud.login.ui.register.RegisterScreen
+import com.example.quizappcrud.login.ui.register.RegisterViewModel
+import com.example.quizappcrud.ui.end.End
+import com.example.quizappcrud.ui.end.ViewModelEnd
+import com.example.quizappcrud.ui.menuUser.MenuUser
+import com.example.quizappcrud.ui.menuUser.ViewModelMenuUser
+import com.example.quizappcrud.ui.test.Test
+import com.example.quizappcrud.ui.test.ViewModelTest
 
 @Composable
 fun AppNavigation() {
@@ -27,6 +39,12 @@ fun AppNavigation() {
         composable(AppScreens.ModificarDatos.ruta) { ModificarDatos(ViewModelModificar()) }
         composable(AppScreens.EliminarDatos.ruta) { EliminarDatos(ViewModelEliminar()) }
         composable(AppScreens.InformeDatos.ruta) { InformeDatos(ViewModelInforme()) }
+        composable(AppScreens.ConsultarDatos.ruta) { ConsultarDatos(ViewModelConsultar())}
+        composable(AppScreens.LoginScreen.ruta) { LoginScreen(LoginViewModel()) }
+        composable(AppScreens.RegisterScreen.ruta) { RegisterScreen(RegisterViewModel()) }
+        composable(AppScreens.MenuUser.ruta) { MenuUser(ViewModelMenuUser(), navigationController)}
+        composable(AppScreens.Test.ruta) { Test(ViewModelTest()) }
+        composable(AppScreens.End.ruta) { End( ViewModelEnd(), ViewModelTest(), navigationController)}
 
     }
 }

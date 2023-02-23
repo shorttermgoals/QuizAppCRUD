@@ -67,7 +67,7 @@ class ViewModelInforme:ViewModel() {
             .addOnSuccessListener { resultado ->
                 for (encontrado in resultado) {
 
-                    _datos.value += "Respuesta 1: ${encontrado.getString("respuesta1")}\n"
+                    _datos.value += "${encontrado.getString("respuesta1")},"
 
                 }
 
@@ -87,7 +87,7 @@ class ViewModelInforme:ViewModel() {
             .addOnSuccessListener { resultado ->
                 for (encontrado in resultado) {
 
-                    _datos.value += "Respuesta 2: ${encontrado.getString("respuesta2")}\n"
+                    _datos.value += "${encontrado.getString("respuesta2")},"
 
                 }
 
@@ -107,7 +107,7 @@ class ViewModelInforme:ViewModel() {
             .addOnSuccessListener { resultado ->
                 for (encontrado in resultado) {
 
-                    _datos.value += "Respuesta 3: ${encontrado.getString("respuesta3")}\n\n"
+                    _datos.value += "${encontrado.getString("respuesta3")},"
 
                 }
 
@@ -127,7 +127,7 @@ class ViewModelInforme:ViewModel() {
             .addOnSuccessListener { resultado ->
                 for (encontrado in resultado) {
 
-                    _datos.value += "Respuesta correcta: ${encontrado.getString("respuestaCorrecta")},"
+                    _datos.value += "${encontrado.getString("respuestaCorrecta")},"
 
                 }
 

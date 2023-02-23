@@ -7,11 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.example.quizappcrud.login.ui.login.LoginScreen
-import com.example.quizappcrud.login.ui.login.LoginViewModel
+import com.example.quizappcrud.navigation.AppNavigation
 import com.example.quizappcrud.ui.theme.QuizAppCRUDTheme
 
-class AuthActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -21,7 +20,7 @@ class AuthActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    LoginScreen(LoginViewModel())
+                    AppNavigation()
                 }
             }
         }

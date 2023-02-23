@@ -1,6 +1,8 @@
 package com.example.quizappcrud.login.ui.login
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -16,124 +18,83 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.quizappcrud.R
+import com.example.quizappcrud.login.data.nombre_coleccion
 import kotlinx.coroutines.launch
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel) {
-    Box(
-        Modifier
-            .fillMaxSize()
-            .padding(16.dp)){
-        Login(Modifier.align(Alignment.Center), viewModel)
-    }
-}
+fun LoginScreen(LoginViewModel: LoginViewModel) {
 
+    val email:String by LoginViewModel.email.observeAsState(initial = "")
+    val password:String by LoginViewModel.password.observeAsState(initial = "")
+    val confirmation_message by LoginViewModel.confirmation_message.observeAsState(initial = "")
 
-@Composable
-fun Login(modifier: Modifier, viewModel: LoginViewModel) {
-
-    val email:String by viewModel.email.observeAsState(initial = "")
-    val password:String by viewModel.password.observeAsState(initial = "")
-    val loginEnable:Boolean by viewModel.loginEnable.observeAsState(initial = false)
-    val isLoading:Boolean by viewModel.isLoading.observeAsState(initial = false)
-    val coroutineScope = rememberCoroutineScope()
-
-    if(isLoading){
-        Box(Modifier.fillMaxSize()){
-            CircularProgressIndicator(Modifier.align(Alignment.Center))
-        }
-    }else{
-        Column(modifier = Modifier) {
-            HeaderImage(modifier = Modifier.align(Alignment.CenterHorizontally))
-            Spacer(modifier = Modifier.padding(16.dp))
-            EmailField(email){ viewModel.onLoginChanged(it, password) }
-            Spacer(modifier = Modifier.padding(4.dp))
-            PasswordField(password){ viewModel.onLoginChanged(email,it) }
-            Spacer(modifier = Modifier.padding(8.dp))
-            ForgotPassword(Modifier.align(Alignment.End))
-            Spacer(modifier = Modifier.padding(16.dp))
-            LoginButton(loginEnable){ coroutineScope.launch{
-                viewModel.onLoginSelected()
-            } }
-    }
-
-
-    }
-}
-
-@Composable
-fun LoginButton(loginEnable: Boolean, onLoginSelected: () -> Unit) {
-    Button(
-        onClick = {
-
-        },
+    Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(48.dp),
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = Color(0xFF4D068B),
-            disabledBackgroundColor = Color(0xFF6700C0),
-            contentColor = Color.White,
-            disabledContentColor = Color.White
-        ), enabled = loginEnable
-    ){
-        Text(text = "Iniciar Sesión")
+            .padding(16.dp),
+        elevation = 12.dp,
+        shape = MaterialTheme.shapes.small,
+        backgroundColor = Color.White,
+        contentColor = Color.DarkGray,
+        border = BorderStroke(1.dp, Color.DarkGray)
+    ) {
+        Box(modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ){
+            Column( modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.White)
+                .padding(15.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center) {
+                Text(   text = "Login",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(bottom = 15.dp))
+                //Input de texto
+                OutlinedTextField(
+                    value = email,
+                    onValueChange = { LoginViewModel.onCompletedFields(email = it, password = password) },
+                    label = { Text("Email") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 10.dp),
+                    singleLine = true,
+                )
+                //Input de texto
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { LoginViewModel.onCompletedFields(email = email, password = it) },
+                    label = { Text("Password") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 10.dp),
+                    singleLine = true,
+                )
+                val dato = hashMapOf(
+                    "email" to email.toString(),
+                    "password" to password.toString()
+                )
+
+
+                Button(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp),
+                    onClick = {
+
+                    }) {
+                    Text(text = "Guardar")
+                }
+
+                Text(text = confirmation_message, modifier = Modifier.padding(top = 10.dp))
+
+
+
+
+
+            }
+        }
     }
-}
-
-@Composable
-fun ForgotPassword(modifier: Modifier) {
-    Text(
-        text = "¿Olvidaste la contraseña?",
-        modifier = Modifier.clickable {  },
-        fontSize = 12.sp,
-        fontWeight = FontWeight.Bold
-        )
-}
-
-
-@Composable
-fun PasswordField(password: String, onTextFieldChanged: (String) -> Unit) {
-    TextField(
-        value =password , onValueChange ={onTextFieldChanged(it)},
-        placeholder = { Text(text = "Contraseña")},
-        modifier = Modifier.fillMaxWidth(),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        singleLine = true,
-        maxLines = 1,
-        colors = TextFieldDefaults.textFieldColors(
-            textColor = Color(0xFF636262),
-            backgroundColor = Color(0xFFDEDDDD),
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        )
-        )
-}
-
-
-@Composable
-fun EmailField(email: String, onTextFieldChanged:(String)->Unit) {
-    TextField(value = email , onValueChange ={ onTextFieldChanged(it) },
-        modifier = Modifier.fillMaxWidth(),
-        placeholder = { Text(text = "Email")},
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-        singleLine = true,
-        maxLines = 1,
-        colors = TextFieldDefaults.textFieldColors(
-            textColor = Color(0xFF636262),
-            backgroundColor = Color(0xFFDEDDDD),
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        )
-        )
-}
-
-@Composable
-fun HeaderImage(modifier: Modifier) {
-    Image(
-        painter = painterResource(id = R.drawable.logo_app___copia),
-        contentDescription = "Header",
-        modifier = modifier )
 }
 
 
