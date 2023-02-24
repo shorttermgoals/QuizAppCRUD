@@ -35,15 +35,15 @@ fun AppNavigation() {
     {
 
         composable(AppScreens.Menu.ruta) { Menu(ViewModelMenu(), navigationController) }
-        composable(AppScreens.GuardarDatos.ruta) { GuardarDatos(ViewModelGuardar()) }
-        composable(AppScreens.ModificarDatos.ruta) { ModificarDatos(ViewModelModificar()) }
-        composable(AppScreens.EliminarDatos.ruta) { EliminarDatos(ViewModelEliminar()) }
-        composable(AppScreens.InformeDatos.ruta) { InformeDatos(ViewModelInforme()) }
-        composable(AppScreens.ConsultarDatos.ruta) { ConsultarDatos(ViewModelConsultar())}
-        composable(AppScreens.LoginScreen.ruta) { LoginScreen(LoginViewModel()) }
-        composable(AppScreens.RegisterScreen.ruta) { RegisterScreen(RegisterViewModel()) }
+        composable(AppScreens.GuardarDatos.ruta) { GuardarDatos(ViewModelGuardar(), navigationController) }
+        composable(AppScreens.ModificarDatos.ruta) { ModificarDatos(ViewModelModificar(), navigationController) }
+        composable(AppScreens.EliminarDatos.ruta) { EliminarDatos(ViewModelEliminar(), navigationController) }
+        composable(AppScreens.InformeDatos.ruta) { InformeDatos(ViewModelInforme(), navigationController) }
+        composable(AppScreens.ConsultarDatos.ruta) { ConsultarDatos(ViewModelConsultar(), navigationController)}
+        composable(AppScreens.LoginScreen.ruta) { LoginScreen(LoginViewModel(), navigationController) }
+        composable(AppScreens.RegisterScreen.ruta) { RegisterScreen(RegisterViewModel(), navigationController) }
         composable(AppScreens.MenuUser.ruta) { MenuUser(ViewModelMenuUser(), navigationController)}
-        composable(AppScreens.Test.ruta) { Test(ViewModelTest()) }
+        composable(AppScreens.Test.ruta) { Test(ViewModelTest(), navigationController) }
         composable(AppScreens.End.ruta) { End( ViewModelEnd(), ViewModelTest(), navigationController)}
 
     }

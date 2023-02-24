@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.quizappcrud.crud.consultar.ViewModelConsultar
 import com.example.quizappcrud.crud.db
 import com.example.quizappcrud.crud.informe.ViewModelInforme
@@ -21,7 +22,7 @@ import java.util.regex.Pattern
 import kotlin.streams.toList
 
 @Composable
-fun Test(ViewModelTest:ViewModelTest) {
+fun Test(ViewModelTest:ViewModelTest, navController: NavHostController) {
     Box(modifier = Modifier
         .fillMaxHeight()
         .fillMaxWidth(),
