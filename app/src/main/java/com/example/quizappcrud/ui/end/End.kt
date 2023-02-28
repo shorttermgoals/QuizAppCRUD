@@ -52,7 +52,7 @@ fun End(ViewModelEnd:ViewModelEnd,ViewModelTest: ViewModelTest, navController: N
                     fontSize = 20.sp,
                     modifier = Modifier.padding(bottom = 6.dp))
 
-                Text(   text = "Tu puntuación ha sido " + puntuacion,
+                Text(   text = "Tu puntuación: " + puntuacion,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     modifier = Modifier.padding(bottom = 15.dp))
