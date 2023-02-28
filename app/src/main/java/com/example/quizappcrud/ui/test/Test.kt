@@ -56,9 +56,9 @@ fun Botones(ViewModelTest: ViewModelTest, ViewModelInforme: ViewModelInforme){
     var respuestasCorrectas = ViewModelInforme.informeRespuestaCorrecta(db, nombre_coleccion)
     val listaRespuestasCorrectas = respuestasCorrectas.toString().split(",").toList()
 
-    val contador:Int by ViewModelTest.contador.observeAsState(initial = 0)
-    val puntuacion:Int by ViewModelTest.puntuacion.observeAsState (initial = 0)
-    val enabled:Boolean by ViewModelTest.enabled.observeAsState(initial = true)
+    var contador: Int by remember { mutableStateOf(0) }
+    var puntuacion: Int by remember { mutableStateOf(0) }
+    var enabled by remember { mutableStateOf(true) }
 
     val colour = Color.Transparent
     val verde = Color.Green
