@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -87,6 +88,9 @@ fun RegisterScreen(RegisterViewModel: RegisterViewModel, navController: NavHostC
                     value = edad,
                     onValueChange = { RegisterViewModel.onCompletedFields( nombre = nombre, apellidos = apellidos, edad = it, nacionalidad = nacionalidad, email = email, password = password) },
                     label = { Text("Edad") },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number
+                    ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 10.dp),
@@ -117,6 +121,8 @@ fun RegisterScreen(RegisterViewModel: RegisterViewModel, navController: NavHostC
                     value = password,
                     onValueChange = { RegisterViewModel.onCompletedFields( nombre = nombre, apellidos = apellidos, edad = edad, nacionalidad = nacionalidad, email = email, password = it) },
                     label = { Text("Password") },
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 10.dp),

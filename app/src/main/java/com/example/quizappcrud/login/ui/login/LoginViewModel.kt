@@ -41,8 +41,8 @@ class LoginViewModel : ViewModel(){
 
     private fun isValidEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
-    fun loginButton(db: FirebaseFirestore, nombre_coleccion:String, email: String){
-        consultarDatos(db, nombre_coleccion, email)
+    fun loginButton(db: FirebaseFirestore, nombre_coleccion:String, email: String, password: String){
+        consultarDatos(db, nombre_coleccion, email, password)
 
         if(_detectorConsultaDatos.value == true){
             _confirmation_message.value = "Login completado con éxito"
@@ -63,7 +63,7 @@ class LoginViewModel : ViewModel(){
         _confirmation_message.value = "ERROR: Ha habido un error. Por favor inténtelo de nuevo o más tarde."
     }
 
-    fun consultarDatos(db: FirebaseFirestore, nombre_coleccion:String, email: String){
+    fun consultarDatos(db: FirebaseFirestore, nombre_coleccion:String, email: String, password: String){
 
         _email2.value = ""
         _pw2.value = ""

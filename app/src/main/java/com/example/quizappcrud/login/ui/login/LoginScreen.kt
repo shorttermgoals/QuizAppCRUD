@@ -15,12 +15,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.quizappcrud.R
 import com.example.quizappcrud.login.data.nombre_coleccion
 import kotlinx.coroutines.launch
+import com.example.quizappcrud.login.data.db
+import com.example.quizappcrud.login.ui.login.*
 
 @Composable
 fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController) {
@@ -70,6 +73,8 @@ fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 10.dp),
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password),
                     singleLine = true,
                 )
                 val dato = hashMapOf(
@@ -90,9 +95,9 @@ fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController
                     .fillMaxWidth()
                     .padding(top = 10.dp),
                     onClick = {
-
+                        LoginViewModel.loginButton(db, nombre_coleccion, email, password)
                     }) {
-                    Text(text = "Registrar")
+                    Text(text = "Login")
                 }
 
                 Text(text = confirmation_message, modifier = Modifier.padding(top = 10.dp))
