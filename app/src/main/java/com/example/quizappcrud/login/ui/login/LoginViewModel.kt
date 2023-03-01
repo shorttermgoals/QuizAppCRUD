@@ -1,12 +1,9 @@
-package com.example.quizappcrud.login.ui.login
-
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.delay
 
 class LoginViewModel : ViewModel(){
 
@@ -41,17 +38,17 @@ class LoginViewModel : ViewModel(){
 
     private fun isValidEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
-    fun loginButton(db: FirebaseFirestore, nombre_coleccion:String, email: String, password: String){
-        consultarDatos(db, nombre_coleccion, email, password)
+    fun loginButton(db: FirebaseFirestore, nombre_coleccion:String, email: String, dato: HashMap<String, String>, navController: NavHostController){
+        consultarDatos(db, nombre_coleccion, email)
 
         if(_detectorConsultaDatos.value == true){
             _confirmation_message.value = "Login completado con éxito"
-            navegarMenuJuego()
+            navegarMenuJuego(navController)
         }
     }
 
-    fun navegarMenuJuego() {
-        TODO("Not yet implemented")
+    fun navegarMenuJuego(navController: NavHostController) {
+        rutaButton(navController, "Menu.kt")
     }
 
     fun buttonSuccess(){
@@ -63,7 +60,7 @@ class LoginViewModel : ViewModel(){
         _confirmation_message.value = "ERROR: Ha habido un error. Por favor inténtelo de nuevo o más tarde."
     }
 
-    fun consultarDatos(db: FirebaseFirestore, nombre_coleccion:String, email: String, password: String){
+    fun consultarDatos(db: FirebaseFirestore, nombre_coleccion:String, email: String){
 
         _email2.value = ""
         _pw2.value = ""
@@ -77,6 +74,7 @@ class LoginViewModel : ViewModel(){
                     _pw2.value = "${documentSnapshot.getString("password")}"
                     if(_email2.value == _email.value && _pw2.value == _password.value){
                         _detectorConsultaDatos.value = true
+
                     }
                 } else {
                     _confirmation_message.value = "ERROR: El dato buscado no existe en la base de datos."

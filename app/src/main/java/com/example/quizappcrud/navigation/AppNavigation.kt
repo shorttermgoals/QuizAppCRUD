@@ -1,5 +1,6 @@
 package com.example.quizappcrud.navigation
 
+import LoginViewModel
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,7 +18,6 @@ import com.example.quizappcrud.crud.menu.ViewModelMenu
 import com.example.quizappcrud.crud.modificar.ModificarDatos
 import com.example.quizappcrud.crud.modificar.ViewModelModificar
 import com.example.quizappcrud.login.ui.login.LoginScreen
-import com.example.quizappcrud.login.ui.login.LoginViewModel
 import com.example.quizappcrud.login.ui.register.RegisterScreen
 import com.example.quizappcrud.login.ui.register.RegisterViewModel
 import com.example.quizappcrud.ui.end.End

@@ -1,9 +1,8 @@
 package com.example.quizappcrud.login.ui.login
 
+import LoginViewModel
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -12,18 +11,14 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.quizappcrud.R
 import com.example.quizappcrud.login.data.nombre_coleccion
-import kotlinx.coroutines.launch
 import com.example.quizappcrud.login.data.db
-import com.example.quizappcrud.login.ui.login.*
 
 @Composable
 fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController) {
@@ -51,14 +46,21 @@ fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController
                 .padding(15.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center) {
-                Text(   text = "Login",
+                Text(
+                    text = "Login",
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
-                    modifier = Modifier.padding(bottom = 15.dp))
+                    modifier = Modifier.padding(bottom = 15.dp)
+                )
                 //Input de texto
                 OutlinedTextField(
                     value = email,
-                    onValueChange = { LoginViewModel.onCompletedFields(email = it, password = password) },
+                    onValueChange = {
+                        LoginViewModel.onCompletedFields(
+                            email = it,
+                            password = password
+                        )
+                    },
                     label = { Text("Email") },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -68,7 +70,12 @@ fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController
                 //Input de texto
                 OutlinedTextField(
                     value = password,
-                    onValueChange = { LoginViewModel.onCompletedFields(email = email, password = it) },
+                    onValueChange = {
+                        LoginViewModel.onCompletedFields(
+                            email = email,
+                            password = it
+                        )
+                    },
                     label = { Text("Password") },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -86,7 +93,7 @@ fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController
                     .fillMaxWidth()
                     .padding(top = 10.dp),
                     onClick = {
-                        LoginViewModel.rutaButton(navController,"RegisterScreen" )
+                        LoginViewModel.rutaButton(navController, "RegisterScreen")
                     }) {
                     Text(text = "Ir al registro")
                 }
@@ -95,20 +102,16 @@ fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController
                     .fillMaxWidth()
                     .padding(top = 10.dp),
                     onClick = {
-                        LoginViewModel.loginButton(db, nombre_coleccion, email, password)
+                        LoginViewModel.loginButton(db, nombre_coleccion, email, dato, navController)
+                        LoginViewModel.rutaButton(navController, "Menu")
+
                     }) {
                     Text(text = "Login")
                 }
 
                 Text(text = confirmation_message, modifier = Modifier.padding(top = 10.dp))
 
-
-
-
-
             }
         }
     }
 }
-
-
