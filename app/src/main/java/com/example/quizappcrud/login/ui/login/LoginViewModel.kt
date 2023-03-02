@@ -38,17 +38,20 @@ class LoginViewModel : ViewModel(){
 
     private fun isValidEmail(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
-    fun loginButton(db: FirebaseFirestore, nombre_coleccion:String, email: String, dato: HashMap<String, String>, navController: NavHostController){
+    fun loginButton(db: FirebaseFirestore, nombre_coleccion:String, email: String, dato: HashMap<String, String>, navController: NavHostController): Boolean{
         consultarDatos(db, nombre_coleccion, email)
+        val loginCorrecto = consultarDatos(db, nombre_coleccion, email)
 
-        if(_detectorConsultaDatos.value == true){
+
+        if(loginCorrecto){
             _confirmation_message.value = "Login completado con éxito"
             navegarMenuJuego(navController)
         }
+        return loginCorrecto
     }
 
     fun navegarMenuJuego(navController: NavHostController) {
-        rutaButton(navController, "Menu.kt")
+        rutaButton(navController, "Menu")
     }
 
     fun buttonSuccess(){
@@ -60,7 +63,7 @@ class LoginViewModel : ViewModel(){
         _confirmation_message.value = "ERROR: Ha habido un error. Por favor inténtelo de nuevo o más tarde."
     }
 
-    fun consultarDatos(db: FirebaseFirestore, nombre_coleccion:String, email: String){
+    fun consultarDatos(db: FirebaseFirestore, nombre_coleccion:String, email: String): Boolean{
 
         _email2.value = ""
         _pw2.value = ""
@@ -83,6 +86,7 @@ class LoginViewModel : ViewModel(){
             .addOnFailureListener {
                 _confirmation_message.value = "ERROR: Ha habido un error. Por favor inténtelo de nuevo o más tarde."
             }
+        return _detectorConsultaDatos.value == true
     }
 
     fun rutaButton(navController: NavHostController, ruta:String){

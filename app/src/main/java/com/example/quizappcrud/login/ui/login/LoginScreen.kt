@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.quizappcrud.login.data.nombre_coleccion
 import com.example.quizappcrud.login.data.db
+import com.example.quizappcrud.login.ui.register.RegisterViewModel
 
 @Composable
 fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController) {
@@ -26,7 +27,6 @@ fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController
     val email:String by LoginViewModel.email.observeAsState(initial = "")
     val password:String by LoginViewModel.password.observeAsState(initial = "")
     val confirmation_message by LoginViewModel.confirmation_message.observeAsState(initial = "")
-
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -85,8 +85,8 @@ fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController
                     singleLine = true,
                 )
                 val dato = hashMapOf(
-                    "email" to email.toString(),
-                    "password" to password.toString()
+                    "email" to email,
+                    "password" to password
                 )
 
                 Button(modifier = Modifier
@@ -102,8 +102,10 @@ fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController
                     .fillMaxWidth()
                     .padding(top = 10.dp),
                     onClick = {
-                        LoginViewModel.loginButton(db, nombre_coleccion, email, dato, navController)
-                        LoginViewModel.rutaButton(navController, "Menu")
+                        val loginCorrecto = LoginViewModel.loginButton(db, nombre_coleccion, email, dato, navController)
+                        if (loginCorrecto) {
+                            LoginViewModel.rutaButton(navController, "Menu")
+                        }
 
                     }) {
                     Text(text = "Login")
