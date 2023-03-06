@@ -3,6 +3,7 @@ package com.example.quizappcrud.crud.eliminar
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -11,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -55,6 +57,9 @@ fun EliminarDatos(ViewModelEliminar: ViewModelEliminar, navController: NavHostCo
                     value = id,
                     onValueChange = { ViewModelEliminar.onCompletedFields(id = it) },
                     label = { Text("Introduzca la ID del dato que desea eliminar") },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number
+                    ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 10.dp),

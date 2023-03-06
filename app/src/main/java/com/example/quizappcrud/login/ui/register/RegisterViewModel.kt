@@ -12,7 +12,6 @@ class RegisterViewModel : ViewModel(){
 
     private val _nombre = MutableLiveData<String>()
     val nombre : LiveData<String> = _nombre
-    val nombreUsuario = nombre.value.toString()
 
     private val _apellidos = MutableLiveData<String>()
     val apellidos : LiveData<String> = _apellidos

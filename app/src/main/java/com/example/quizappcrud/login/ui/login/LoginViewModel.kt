@@ -1,8 +1,10 @@
 import android.util.Patterns
+import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
+import com.example.quizappcrud.R
 import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginViewModel : ViewModel(){
@@ -45,13 +47,15 @@ class LoginViewModel : ViewModel(){
 
         if(loginCorrecto){
             _confirmation_message.value = "Login completado con éxito"
-            navegarMenuJuego(navController)
+            navegarMenuJuego(navController, email)
         }
         return loginCorrecto
     }
 
-    fun navegarMenuJuego(navController: NavHostController) {
+    fun navegarMenuJuego(navController: NavHostController, email: String) {
         rutaButton(navController, "Menu")
+        _email.value = email // save the email value in LiveData
+
     }
 
     fun buttonSuccess(){

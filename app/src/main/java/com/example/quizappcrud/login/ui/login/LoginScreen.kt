@@ -16,13 +16,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.quizappcrud.login.data.nombre_coleccion
 import com.example.quizappcrud.login.data.db
-import com.example.quizappcrud.login.ui.register.RegisterViewModel
 
 @Composable
-fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController) {
+fun LoginScreen(navController: NavHostController, LoginViewModel: LoginViewModel = viewModel()) {
 
     val email:String by LoginViewModel.email.observeAsState(initial = "")
     val password:String by LoginViewModel.password.observeAsState(initial = "")
@@ -55,6 +55,7 @@ fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController
                 //Input de texto
                 OutlinedTextField(
                     value = email,
+
                     onValueChange = {
                         LoginViewModel.onCompletedFields(
                             email = it,
@@ -104,7 +105,12 @@ fun LoginScreen(LoginViewModel: LoginViewModel, navController: NavHostController
                     onClick = {
                         val loginCorrecto = LoginViewModel.loginButton(db, nombre_coleccion, email, dato, navController)
                         if (loginCorrecto) {
-                            LoginViewModel.rutaButton(navController, "Menu")
+                            LoginViewModel.navegarMenuJuego(navController, email)
+                            if(email == "dperezm8@alumnos.nebrija.es" || email == "hgilg@alumnos.nebrija.es") {
+                                LoginViewModel.rutaButton(navController, "Menu")
+                            } else {
+                                LoginViewModel.rutaButton(navController, "MenuUser")
+                            }
                         }
 
                     }) {

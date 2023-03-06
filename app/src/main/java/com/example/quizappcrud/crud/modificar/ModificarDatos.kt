@@ -3,6 +3,7 @@ package com.example.quizappcrud.crud.modificar
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -11,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -59,7 +61,7 @@ fun ModificarDatos(ViewModelModificar: ViewModelModificar, navController: NavHos
                 //Input de texto
                 OutlinedTextField(
                     value = idBusqueda,
-                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = idBusqueda, id = id, pregunta = pregunta, respuesta1 = respuesta1, respuesta2 = respuesta2, respuesta3 = respuesta3, respuestaCorrecta = respuestaCorrecta) },
+                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = it, id = id, pregunta = pregunta, respuesta1 = respuesta1, respuesta2 = respuesta2, respuesta3 = respuesta3, respuestaCorrecta = respuestaCorrecta) },
                     label = { Text("ID del dato a editar") },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -69,8 +71,11 @@ fun ModificarDatos(ViewModelModificar: ViewModelModificar, navController: NavHos
                 //Input de texto
                 OutlinedTextField(
                     value = id,
-                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = idBusqueda, id = id, pregunta = pregunta, respuesta1 = respuesta1, respuesta2 = respuesta2, respuesta3 = respuesta3, respuestaCorrecta = respuestaCorrecta) },
+                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = idBusqueda, id = it, pregunta = pregunta, respuesta1 = respuesta1, respuesta2 = respuesta2, respuesta3 = respuesta3, respuestaCorrecta = respuestaCorrecta) },
                     label = { Text("ID") },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number
+                    ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 10.dp),
@@ -79,7 +84,7 @@ fun ModificarDatos(ViewModelModificar: ViewModelModificar, navController: NavHos
                 //Input de texto
                 OutlinedTextField(
                     value = pregunta,
-                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = idBusqueda, id = id, pregunta = pregunta, respuesta1 = respuesta1, respuesta2 = respuesta2, respuesta3 = respuesta3, respuestaCorrecta = respuestaCorrecta)  },
+                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = idBusqueda, id = id, pregunta = it, respuesta1 = respuesta1, respuesta2 = respuesta2, respuesta3 = respuesta3, respuestaCorrecta = respuestaCorrecta)  },
                     label = { Text("Pregunta") },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -89,7 +94,7 @@ fun ModificarDatos(ViewModelModificar: ViewModelModificar, navController: NavHos
                 //Input de texto
                 OutlinedTextField(
                     value = respuesta1,
-                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = idBusqueda, id = id, pregunta = pregunta, respuesta1 = respuesta1, respuesta2 = respuesta2, respuesta3 = respuesta3, respuestaCorrecta = respuestaCorrecta)  },
+                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = idBusqueda, id = id, pregunta = pregunta, respuesta1 = it, respuesta2 = respuesta2, respuesta3 = respuesta3, respuestaCorrecta = respuestaCorrecta)  },
                     label = { Text("Respuesta 1") },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -99,7 +104,7 @@ fun ModificarDatos(ViewModelModificar: ViewModelModificar, navController: NavHos
                 //Input de texto
                 OutlinedTextField(
                     value = respuesta2,
-                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = idBusqueda, id = id, pregunta = pregunta, respuesta1 = respuesta1, respuesta2 = respuesta2, respuesta3 = respuesta3, respuestaCorrecta = respuestaCorrecta)  },
+                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = idBusqueda, id = id, pregunta = pregunta, respuesta1 = respuesta1, respuesta2 = it, respuesta3 = respuesta3, respuestaCorrecta = respuestaCorrecta)  },
                     label = { Text("Respuesta 2") },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -109,7 +114,7 @@ fun ModificarDatos(ViewModelModificar: ViewModelModificar, navController: NavHos
                 //Input de texto
                 OutlinedTextField(
                     value = respuesta3,
-                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = idBusqueda, id = id, pregunta = pregunta, respuesta1 = respuesta1, respuesta2 = respuesta2, respuesta3 = respuesta3, respuestaCorrecta = respuestaCorrecta)  },
+                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = idBusqueda, id = id, pregunta = pregunta, respuesta1 = respuesta1, respuesta2 = respuesta2, respuesta3 = it, respuestaCorrecta = respuestaCorrecta)  },
                     label = { Text("Respuesta 3") },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -119,7 +124,7 @@ fun ModificarDatos(ViewModelModificar: ViewModelModificar, navController: NavHos
                 //Input de texto
                 OutlinedTextField(
                     value = respuestaCorrecta,
-                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = idBusqueda, id = id, pregunta = pregunta, respuesta1 = respuesta1, respuesta2 = respuesta2, respuesta3 = respuesta3, respuestaCorrecta = respuestaCorrecta)  },
+                    onValueChange = { ViewModelModificar.onCompletedFields(idBusqueda = idBusqueda, id = id, pregunta = pregunta, respuesta1 = respuesta1, respuesta2 = respuesta2, respuesta3 = respuesta3, respuestaCorrecta = it)  },
                     label = { Text("Respuesta Correcta") },
                     modifier = Modifier
                         .fillMaxWidth()
