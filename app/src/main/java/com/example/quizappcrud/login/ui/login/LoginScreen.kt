@@ -10,7 +10,9 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -18,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.quizappcrud.R
 import com.example.quizappcrud.login.data.nombre_coleccion
 import com.example.quizappcrud.login.data.db
 
@@ -37,12 +40,14 @@ fun LoginScreen(navController: NavHostController, LoginViewModel: LoginViewModel
         contentColor = Color.DarkGray,
         border = BorderStroke(1.dp, Color.DarkGray)
     ) {
-        Box(modifier = Modifier.fillMaxSize(),
+        Box(modifier = Modifier
+            .fillMaxSize(),
             contentAlignment = Alignment.Center
         ){
             Column( modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White)
+
                 .padding(15.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center) {
